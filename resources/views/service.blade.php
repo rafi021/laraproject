@@ -39,6 +39,7 @@
     </nav>
 
     <h1>Service Page</h1>
+    <p>{{ $service_id }}</p>
 
 
 
