@@ -22,11 +22,14 @@ Route::get('/about-us', function () {
 Route::get('/contact-page', function () {
     return view('contact');
 })->name('contact');
-Route::get('/service-page/{service_id}/{service_name?}', function ($service_id, $service_name=null) {
-
-    return "Service". $service_id.''.$service_name;
-
+Route::get('/service-page', function () {
+    return view('service');
 })->name('service');
+// Route::get('/service-page/{service_id}/{service_name?}', function ($service_id, $service_name=null) {
+
+//     return "Service". $service_id.''.$service_name;
+
+// })->name('service');
 
 
 Route::get('/user/{id}/{name}', function($id, $name){
@@ -37,3 +40,8 @@ Route::get('/user/{id}/{name}', function($id, $name){
 Route::get('/category/{category_name}', function ($category_name){
     echo $category_name;
 })->whereIn('category_name', ['electronics', 'movie', 'books', 'watch', 'laptop']);
+
+
+Route::get('/search/{keywords}', function($keywords){
+    echo "$keywords";
+})->where('keywords', '.*');
