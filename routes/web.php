@@ -27,3 +27,13 @@ Route::get('/service-page/{service_id}/{service_name?}', function ($service_id, 
     return "Service". $service_id.''.$service_name;
 
 })->name('service');
+
+
+Route::get('/user/{id}/{name}', function($id, $name){
+  echo $id, $name;
+})->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
+
+
+Route::get('/category/{category_name}', function ($category_name){
+    echo $category_name;
+})->whereIn('category_name', ['electronics', 'movie', 'books', 'watch', 'laptop']);
