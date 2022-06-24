@@ -14,34 +14,44 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home', [
+        'page_name' => 'Home Page',
+        'name' => 'Larael 9 Course'
+    ]);
+
 })->name('home');
 Route::get('/about-us', function () {
-    return view('about');
+    return view('about', [
+        'page_name' => 'About Page',
+    ]);
 })->name('about');
+
+
 Route::get('/contact-page', function () {
-    return view('contact');
+    $page_name = "Contact Page";
+    $product_count = 10;
+    $color = "";
+
+    $products = [];
+
+    return view('contact', compact('page_name', 'product_count', 'color', 'products'));
 })->name('contact');
+
+
+
 Route::get('/service-page', function () {
-    return view('service');
+
+    $services = [
+        'Web Design',
+        'Web Development',
+        'App Development',
+        'Graphics Design',
+    ];
+
+
+    return view('service', compact('services'));
 })->name('service');
-// Route::get('/service-page/{service_id}/{service_name?}', function ($service_id, $service_name=null) {
-
-//     return "Service". $service_id.''.$service_name;
-
-// })->name('service');
 
 
-Route::get('/user/{id}/{name}', function($id, $name){
-  echo $id, $name;
-})->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
 
 
-Route::get('/category/{category_name}', function ($category_name){
-    echo $category_name;
-})->whereIn('category_name', ['electronics', 'movie', 'books', 'watch', 'laptop']);
-
-
-Route::get('/search/{keywords}', function($keywords){
-    echo "$keywords";
-})->where('keywords', '.*');
