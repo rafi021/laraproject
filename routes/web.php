@@ -14,120 +14,102 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function (Request $request) {
+Route::get('/', function (Request $request) {
 
 
-//     // dd(
-//     //     //"Laravel 9"
-//     //     $request->path(),  // path name
-//     //     $request->is('/'), // 1 0r 0
+    // dd(
+    //     //"Laravel 9"
+    //     $request->path(),  // path name
+    //     $request->is('/'), // 1 0r 0
 
-//     //     $request->fullUrl(),
-//     //     $request->host(),
-//     //     $request->httpHost(),
-//     //     $request->schemeAndHttpHost(),
+    //     $request->fullUrl(),
+    //     $request->host(),
+    //     $request->httpHost(),
+    //     $request->schemeAndHttpHost(),
 
-//     //     $request->routeIs('home'),  // 1 or 0
-//     //     $request->header('X-Header-Name'),
-//     //     $request->header('X-Header-Name', 'default'),
-//     //     $request->bearerToken(),  // Used in API building
+    //     $request->routeIs('home'),  // 1 or 0
+    //     $request->header('X-Header-Name'),
+    //     $request->header('X-Header-Name', 'default'),
+    //     $request->bearerToken(),  // Used in API building
 
-//     //     $request->ip(),
-//     //     $request->prefers(['text/html', 'application/json']),
-//     // );
+    //     $request->ip(),
+    //     $request->prefers(['text/html', 'application/json']),
+    // );
 
-//     // $data = [
-//     //     'page_name' => 'Home Page',
-//     //     'name' => 'Larael 9 Course'
-//     // ];
+    // $data = [
+    //     'page_name' => 'Home Page',
+    //     'name' => 'Larael 9 Course'
+    // ];
 
-//     // return response($data)
-//     // ->header('Content-Type', 'application/json')
-//     // ->cookie('My_IDCard', 'Mahmud Ibrahim', 3600);
+    // return response($data)
+    // ->header('Content-Type', 'application/json')
+    // ->cookie('My_IDCard', 'Mahmud Ibrahim', 3600);
 
+    //dd($request->collect());
 
-//     return view('home', [
-//         'page_name' => 'Home Page',
-//         'name' => 'Larael 9 Course'
-//     ]);
-
-
-// })->name('home');
+    return view('home', [
+        'page_name' => 'Home Page',
+        'name' => 'Larael 9 Course'
+    ]);
 
 
+})->name('home')->middleware('auth');
 
-// Route::get('/about-us', function () {
-//     return view('about', [
-//         'page_name' => 'About Page',
-//     ]);
-// })->name('about');
+Route::get('login', function(){
+    return "Login";
+})->name('login');
 
-// Route::get('/contact-page', function () {
-//     $page_name = "Contact Page";
-//     $products=[
-//        1 => [
-//         'name' => 'Bag',
-//         'color' => 'Red',
-//         'price' => '1200',
-//        ],
-//        2 => [
-//         'name' => 'Sunglass',
-//         'color' => 'Black',
-//         'price' => '550',
-//        ],
-//        3 => [
-//         'name' => 'BodySpray',
-//         'color' => 'Blue',
-//         'price' => '850',
-//        ],
-//     ];
-//     $product_count = count($products);
+Route::get('/about-us', function () {
+    return view('about', [
+        'page_name' => 'About Page',
+    ]);
+})->name('about');
 
-//     return response()->json([
-//         'products' => $products,
-//         'product_count' => $product_count,
-//     ], 200)
-//     ->header('Content-Type', 'application/json')
-//     ->cookie('My_IDCard', 'Mahmud Ibrahim', 3600);
-//     // return view('contact', compact(
-//     //     'page_name',
-//     //     'product_count',
-//     //     'products'
-//     // ));
-// })->name('contact');
+Route::get('/contact-page', function () {
+    $page_name = "Contact Page";
+    $products=[
+       1 => [
+        'name' => 'Bag',
+        'color' => 'Red',
+        'price' => '1200',
+       ],
+       2 => [
+        'name' => 'Sunglass',
+        'color' => 'Black',
+        'price' => '550',
+       ],
+       3 => [
+        'name' => 'BodySpray',
+        'color' => 'Blue',
+        'price' => '850',
+       ],
+    ];
+    $product_count = count($products);
 
-// Route::get('/service-page', function () {
+    return response()->json([
+        'products' => $products,
+        'product_count' => $product_count,
+    ], 200);
+    // return view('contact', compact(
+    //     'page_name',
+    //     'product_count',
+    //     'products'
+    // ));
+})->name('contact');
 
-//     $services = [
-//         'Web Design',
-//         'Web Development',
-//         'App Development',
-//         'Graphics Design',
-//     ];
+Route::get('/service-page', function () {
 
-
-//     return view('service', compact('services'));
-// })->name('service');
-
-
-// Route::get('/course-content/download', function(){
-//     return response()->download(public_path('/course_content.pdf'), 'Laravel 9 MasterClass Course Content.pdf');
-// });
+    $services = [
+        'Web Design',
+        'Web Development',
+        'App Development',
+        'Graphics Design',
+    ];
 
 
-// page/home
+    return view('service', compact('services'));
+})->name('service');
 
-Route::prefix('page')->name('manager.')->group(function(){
-    Route::get('/home', function(){
-        return view('home');
-    })->name('home');
-    Route::get('/contact', function(){
-        return view('contact');
-    })->name('contact');
-    Route::get('/about', function(){
-        return view('about');
-    })->name('about');
-    Route::get('/service', function(){
-        return view('service');
-    })->name('service');
-});
+
+
+
