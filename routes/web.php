@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,19 +14,52 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
+
+
+    dd(
+        //"Laravel 9"
+        $request->path(),  // path name
+        $request->is('/'), // 1 0r 0
+
+        $request->fullUrl(),
+        $request->host(),
+        $request->httpHost(),
+        $request->schemeAndHttpHost(),
+
+        $request->routeIs('home'),  // 1 or 0
+        $request->header('X-Header-Name'),
+        $request->header('X-Header-Name', 'default'),
+        $request->bearerToken(),  // Used in API building
+
+        $request->ip(),
+        $request->prefers(['text/html', 'application/json']),
+    );
+
+    // $data = [
+    //     'page_name' => 'Home Page',
+    //     'name' => 'Larael 9 Course'
+    // ];
+
+    // return response($data)
+    // ->header('Content-Type', 'application/json')
+    // ->cookie('My_IDCard', 'Mahmud Ibrahim', 3600);
+
+
     return view('home', [
         'page_name' => 'Home Page',
         'name' => 'Larael 9 Course'
     ]);
 
 })->name('home');
+
+
+
 Route::get('/about-us', function () {
     return view('about', [
         'page_name' => 'About Page',
     ]);
 })->name('about');
-
 
 Route::get('/contact-page', function () {
     $page_name = "Contact Page";
@@ -54,8 +88,6 @@ Route::get('/contact-page', function () {
         'products'
     ));
 })->name('contact');
-
-
 
 Route::get('/service-page', function () {
 
