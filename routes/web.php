@@ -46,18 +46,11 @@ Route::get('/', function (Request $request) {
     // ->cookie('My_IDCard', 'Mahmud Ibrahim', 3600);
 
 
-    // return view('home', [
-    //     'page_name' => 'Home Page',
-    //     'name' => 'Larael 9 Course'
-    // ]);
+    return view('home', [
+        'page_name' => 'Home Page',
+        'name' => 'Larael 9 Course'
+    ]);
 
-        if(nid==verified){
-
-            return redirect('/dashbaord');
-        }else{
-
-            return redirect('/contact-page');
-        }
 
 })->name('home');
 
@@ -90,11 +83,17 @@ Route::get('/contact-page', function () {
     ];
     $product_count = count($products);
 
-    return view('contact', compact(
-        'page_name',
-        'product_count',
-        'products'
-    ));
+    return response()->json([
+        'products' => $products,
+        'product_count' => $product_count,
+    ], 200)
+    ->header('Content-Type', 'application/json')
+    ->cookie('My_IDCard', 'Mahmud Ibrahim', 3600);
+    // return view('contact', compact(
+    //     'page_name',
+    //     'product_count',
+    //     'products'
+    // ));
 })->name('contact');
 
 Route::get('/service-page', function () {
@@ -111,5 +110,7 @@ Route::get('/service-page', function () {
 })->name('service');
 
 
-
+Route::get('/course-content/download', function(){
+    return response()->download(public_path('/course_content.pdf'), 'Laravel 9 MasterClass Course Content.pdf');
+});
 
