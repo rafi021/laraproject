@@ -36,20 +36,28 @@ Route::get('/', function (Request $request) {
     //     $request->prefers(['text/html', 'application/json']),
     // );
 
-    $data = [
-        'page_name' => 'Home Page',
-        'name' => 'Larael 9 Course'
-    ];
+    // $data = [
+    //     'page_name' => 'Home Page',
+    //     'name' => 'Larael 9 Course'
+    // ];
 
-    return response($data)
-    ->header('Content-Type', 'application/json')
-    ->cookie('My_IDCard', 'Mahmud Ibrahim', 3600);
+    // return response($data)
+    // ->header('Content-Type', 'application/json')
+    // ->cookie('My_IDCard', 'Mahmud Ibrahim', 3600);
 
 
     // return view('home', [
     //     'page_name' => 'Home Page',
     //     'name' => 'Larael 9 Course'
     // ]);
+
+        if(nid==verified){
+
+            return redirect('/dashbaord');
+        }else{
+
+            return redirect('/contact-page');
+        }
 
 })->name('home');
 
