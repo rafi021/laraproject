@@ -62,25 +62,4 @@ class FrontController extends Controller
         return view('service', compact('services'));
     }
 
-    public function sendMeDetails(Request $request)
-    {
-        $secret_key = 85978;
-        $user_key = $request->user_key;
-
-        $data = [
-            'user_name' => 'M Ibrahim',
-            'designation' => 'Full Stack Enginner',
-            'mobile' => '12345678',
-            'bank_acc' => '1234567877897123534',
-        ];
-
-        if($secret_key == $user_key){
-            return response()->json([
-                'user_info' => $data
-            ]);
-        }else
-        return response([
-            'message' => 'Provide valid secret key'
-        ], 404);
-    }
 }
