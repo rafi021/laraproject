@@ -19,7 +19,7 @@
                 name="category_slug" placeholder="Please provide Category slug">
             </div>
             <div class="form-check mb-3">
-                <input class="form-check-input" type="checkbox" value=""
+                <input class="form-check-input" type="checkbox"
                 name="is_active" id="flexCheckDefault">
                 <label class="form-check-label" for="flexCheckDefault">
                   Active/Inactive
