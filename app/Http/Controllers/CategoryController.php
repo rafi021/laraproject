@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Devliery;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class RedexController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +23,7 @@ class RedexController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
