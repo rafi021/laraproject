@@ -2,9 +2,8 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserInfoController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +28,4 @@ Route::get('/service-page', [FrontController::class, 'service'])->name('service'
 Route::get('/send-me-details', UserInfoController::class)->name('sendmedetails');
 
 Route::resource('/category', CategoryController::class);
+Route::resource('/subcategory', SubCategoryController::class);
