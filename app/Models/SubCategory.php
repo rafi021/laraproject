@@ -15,4 +15,10 @@ class SubCategory extends Model
         'slug',
         'is_active',
     ];
+
+    /*every subcategory belongto a category */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
