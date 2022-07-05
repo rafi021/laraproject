@@ -9,7 +9,7 @@
     </div>
     <div class="col-8 m-auto my-3">
         <div class="card p-4">
-            <form action="{{ route('subcategory.update') }}" method="POST">
+            <form action="{{ route('subcategory.update', ['subcategory' => $subcategory->id]) }}" method="POST">
                 @method('PUT')
                 @csrf
 
