@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SubCategoryStoreRequest;
 use App\Models\Category;
+use App\Models\SubCategory;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\SubCategoryStoreRequest;
 
 class SubCategoryController extends Controller
 {
@@ -37,7 +40,15 @@ class SubCategoryController extends Controller
      */
     public function store(SubCategoryStoreRequest $request)
     {
-        dd($request->all());
+        SubCategory::create([
+            'category_id' => $request->category_id,
+            'name' => $request->subcategory_name,
+            'slug' => Str::slug($request->subcategory_name),
+            'is_active' => $request->filled('is_active')
+        ]);
+
+        Session::flash('status', 'SubCategory created successfully!');
+        return back();
     }
 
     /**
