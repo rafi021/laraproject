@@ -20,7 +20,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('category.create') }}">Create Category</a>
+            <a class="nav-link" href="{{ route('category.index') }}">Categories</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('subcategory.index') }}">SubCategories</a>
