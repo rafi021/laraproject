@@ -10252,3 +10252,8 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.tab-color{
+    background-color: #ddd;
+    font-size: 18px;
+}
+

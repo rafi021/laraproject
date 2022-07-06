@@ -2,13 +2,17 @@
 
 @section('title', 'Category-Index-Page')
 
+@push('admin_style')
+
+@endpush
+
 @section('content')
 <div class="row">
     <div class="d-flex justify-content-end my-4">
         <a href="{{ route('category.create') }}" class="btn btn-success">Create Category</a>
     </div>
     <div class="col-8 m-auto">
-        <table class="table">
+        <table class="table tab-color">
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -42,3 +46,8 @@
     </div>
 </div>
 @endsection
+
+
+@push('admin_script')
+
+@endpush
