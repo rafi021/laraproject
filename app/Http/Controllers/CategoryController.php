@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Requests\CategoryStoreRequest;
+
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Session;
+use App\Http\Requests\CategoryStoreRequest;
 
 class CategoryController extends Controller
 {
@@ -48,7 +50,8 @@ class CategoryController extends Controller
             'is_active' => $request->filled('is_active')
         ]);
 
-        Session::flash('status', 'Category created successfully!');
+        // Session::flash('status', 'Category created successfully!');
+        Toastr::success('Category created successfully!');
         return back();
     }
 
@@ -92,7 +95,7 @@ class CategoryController extends Controller
             'is_active' => $request->filled('is_active')
         ]);
 
-        Session::flash('status', 'Category updated successfully!');
+        Toastr::info('Category updated successfully!');
         return back();
     }
 
@@ -105,7 +108,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id)->delete();
-        Session::flash('status', 'Category deleted successfully!');
+        Toastr::success('Category deleted successfully!');
         return back();
     }
 }
