@@ -35,7 +35,7 @@
                             <form action="{{ route('category.destroy', ['category' => $category->id]) }}" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="btn btn-danger">Del</button>
+                                <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete'>Del</button>
                             </form>
                         </div>
                     </td>
@@ -49,5 +49,30 @@
 
 
 @push('admin_script')
+<script>
+    $('.show_confirm').click(function(event){
+        let form = $(this).closest('form');
 
+        event.preventDefault();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+                Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
+            }
+            })
+
+    });
+</script>
 @endpush
