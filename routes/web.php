@@ -31,3 +31,4 @@ Route::resource('/category', CategoryController::class);
 Route::resource('/subcategory', SubCategoryController::class);
 
 Route::get('books', [FrontController::class, 'books']);
+Route::get('positions', [FrontController::class, 'positions']);

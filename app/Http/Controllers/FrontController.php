@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Publisher;
 use App\Models\User;
+use App\Models\UserPost;
 use Illuminate\Http\Request;
 
 class FrontController extends Controller
@@ -85,6 +86,17 @@ class FrontController extends Controller
         // $books = Book::with(['author', 'publisher', 'booktype'])->get();
        $publishers = Publisher::withCount('books')->get();
        return $publishers;
+    }
+
+    public function positions()
+    {
+        // $books = Book::with(['author', 'publisher', 'booktype'])->get();
+
+        // long way
+        // $positions = UserPost::with('user.country')->get();
+        // short way
+       $positions = UserPost::with('country')->get();
+       return $positions;
     }
 
 }
