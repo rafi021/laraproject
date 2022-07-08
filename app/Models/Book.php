@@ -10,20 +10,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Book extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
 
 
-    public function author()
-    {
-        return $this->belongsTo(Author::class, );
-    }
     public function publisher()
     {
         return $this->belongsTo(Publisher::class);
     }
 
-    public function booktype()
+    public function author()
     {
-        return $this->belongsTo(BookType::class, 'book_type_id', 'id');
+        return $this->belongsTo(Author::class);
     }
 }

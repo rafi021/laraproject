@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\BookType;
 use App\Models\Publisher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,11 +18,11 @@ class BookFactory extends Factory
     public function definition()
     {
         return [
-            'book_type_id' => BookType::select('id')->get()->random()->id,
+            'book_type_id' => 1,
             'publisher_id' => Publisher::select('id')->get()->random()->id,
-            'title' => $this->faker->sentence,
-            'no_pages' => rand(10,500),
-            'publishing_year' => $this->faker->year
+            'title' => $this->faker->title,
+            'no_pages' => rand(10,100),
+            'publishing_year' => $this->faker->year()
         ];
     }
 }
