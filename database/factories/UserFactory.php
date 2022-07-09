@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Country;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -40,6 +41,37 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'email_verified_at' => null,
+            ];
+        });
+    }
+
+
+    public function admin()
+    {
+        return $this->state(function (array $attributes){
+            return [
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
+                'email_verified_at' => now(),
+                'password' => Hash::make('1234'),
+                'remember_token' => Str::random(10),
+                'phone' => '12345678903',
+                'country_id' => 1
+            ];
+        });
+    }
+
+    public function manager()
+    {
+        return $this->state(function (array $attributes){
+            return [
+                'name' => 'manager',
+                'email' => 'manager@gmail.com',
+                'email_verified_at' => now(),
+                'password' => Hash::make('1234'),
+                'remember_token' => Str::random(10),
+                'phone' => '12345678904',
+                'country_id' => 1
             ];
         });
     }

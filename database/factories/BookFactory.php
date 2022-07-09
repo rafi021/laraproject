@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Publisher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -24,5 +25,14 @@ class BookFactory extends Factory
             'no_pages' => rand(10,100),
             'publishing_year' => $this->faker->year()
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterMaking(function (User $user) {
+            dump($user);
+        })->afterCreating(function (User $user) {
+            dump($user);
+        });
     }
 }
