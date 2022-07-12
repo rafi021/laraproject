@@ -2,11 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Country;
+use App\Models\SubCategory;
 use App\Models\User;
-use App\Models\UserPost;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,13 +20,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Country::factory(10)->create();
-        User::factory(10)->create();
-        UserPost::factory(10)->create();
+        $this->call([
+            CountrySeeder::class,
+            UserSeeder::class,
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+
     }
 }
