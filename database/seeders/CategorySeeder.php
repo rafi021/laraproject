@@ -15,6 +15,8 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $categories = Category::factory(10)->create();
+        $seedCount = (int) $this->command->ask('How many fake data do you want me to seed?', 20);
+
+        $categories = Category::factory($seedCount)->create();
     }
 }

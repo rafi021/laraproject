@@ -15,6 +15,7 @@ class SubCategorySeeder extends Seeder
      */
     public function run()
     {
-        SubCategory::factory(10)->create();
+        $seedCount = (int) $this->command->ask('How many fake data do you want me to seed?', 20);
+        SubCategory::factory($seedCount)->create();
     }
 }
