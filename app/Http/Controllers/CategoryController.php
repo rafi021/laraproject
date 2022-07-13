@@ -20,9 +20,13 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::query()
+        ->withCount('subcategories')->get(['id', 'name', 'created_at']);
+
+        $delcategories = Category::query()
         ->onlyTrashed()
         ->withCount('subcategories')->get(['id', 'name', 'created_at']);
-        return view('category.index', compact('categories'));
+
+        return view('category.index', compact('categories', 'delcategories'));
     }
 
     /**
@@ -111,6 +115,13 @@ class CategoryController extends Controller
     {
         $category = Category::find($id)->delete();
         Toastr::success('Category deleted successfully!');
+        return back();
+    }
+
+    public function restore($category_id)
+    {
+        Category::onlyTrashed()->find($category_id)->restore();
+        Toastr::success('Category restore successfully!');
         return back();
     }
 }
