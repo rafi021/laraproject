@@ -75,11 +75,12 @@
                     <td>
                         <div class="d-flex justify-content-center">
                             <a href="{{ route('category.restore',['category_id' => $category->id]) }}" class="btn btn-info">Restore</a>
-                            <form action="{{ route('category.destroy', ['category' => $category->id]) }}" method="post">
-                                @method('DELETE')
+                            <form action="{{ route('category.forcedelete', ['category_id' => $category->id]) }}" method="post">
+                                @method('GET')
                                 @csrf
                                 <button type="submit" class="btn btn-danger show_confirm" data-toggle="tooltip" title='Delete'>Force Del</button>
                             </form>
+
                         </div>
                     </td>
                   </tr>
