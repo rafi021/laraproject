@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductStoreRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -36,9 +37,18 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        dd($request->all());
+        $file_exits = $request->hasFile('image');
+
+        if($file_exits){
+            $file = $request->file('image');
+            $file_type = $file->getClientMimeType();
+            $file_ext = $file->getClientOriginalExtension();
+            $file_org_name = $file->getClientOriginalName();
+
+            dd($file, $file_type, $file_ext, $file_org_name);
+        }
     }
 
     /**
