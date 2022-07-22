@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserInfoController;
 use Illuminate\Support\Facades\Route;
@@ -34,3 +35,6 @@ Route::resource('/subcategory', SubCategoryController::class);
 
 Route::get('books', [FrontController::class, 'books']);
 Route::get('positions', [FrontController::class, 'positions']);
+
+
+Route::resource('/products', ProductController::class);
