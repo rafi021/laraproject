@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductStoreRequest;
+use Image;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ProductStoreRequest;
 
 class ProductController extends Controller
 {
@@ -39,15 +44,39 @@ class ProductController extends Controller
      */
     public function store(ProductStoreRequest $request)
     {
-        $file_exits = $request->hasFile('image');
+        $product = Product::create([
+            'category_id' => $request->category_id,
+            'subcategory_id' => $request->subcategory_id,
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+            'description' => $request->description,
+            'price' => $request->price,
+        ]);
 
-        if($file_exits){
-            $file = $request->file('image');
-            $file_type = $file->getClientMimeType();
-            $file_ext = $file->getClientOriginalExtension();
-            $file_org_name = $file->getClientOriginalName();
+        $this->image_upload($request, $product->id);
+        Toastr::success('Product created!');
+        return back();
+    }
 
-            dd($file, $file_type, $file_ext, $file_org_name);
+
+
+    public function image_upload($request, $product_id)
+    {
+        if($request->hasFile('image')){
+            // photo location
+            $photo_location = 'public/uploads/product-image/';
+            $uploaded_photo = $request->file('image');
+            $photo_name = $product_id.'.'.$uploaded_photo->getClientOriginalExtension();
+            $new_photo_location = $photo_location.$photo_name; ///public/uploads/product-image/1.jpg
+            Image::make($uploaded_photo)->resize(600,600)->save(base_path($new_photo_location));
+
+            //update the product image field
+            $product = Product::find($product_id);
+            $product->update([
+                'image' => $photo_name
+            ]);
+        }else{
+            return back();
         }
     }
 
