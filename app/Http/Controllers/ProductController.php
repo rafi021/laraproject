@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Image;
+use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
+use App\Mail\ProductCreated;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProductStoreRequest;
 
@@ -54,6 +57,14 @@ class ProductController extends Controller
         ]);
 
         $this->image_upload($request, $product->id);
+
+        // Mail Send
+        $user = User::find(1);
+        $updated_product = Product::find($product->id);
+        Mail::to($user)->send(
+            new ProductCreated($updated_product)
+        );
+
         Toastr::success('Product created!');
         return back();
     }
@@ -68,7 +79,7 @@ class ProductController extends Controller
             $uploaded_photo = $request->file('image');
             $photo_name = $product_id.'.'.$uploaded_photo->getClientOriginalExtension();
             $new_photo_location = $photo_location.$photo_name; ///public/uploads/product-image/1.jpg
-            Image::make($uploaded_photo)->resize(600,600)->save(base_path($new_photo_location));
+            Image::make($uploaded_photo)->resize(100,100)->save(base_path($new_photo_location));
 
             //update the product image field
             $product = Product::find($product_id);
