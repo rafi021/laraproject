@@ -34,6 +34,10 @@ class CategoryCreated extends Mailable
         $subject = "Category: {$this->category->name} Cretaed";
         return $this
         ->subject($subject)
+        ->attach(public_path('invoices/invoice.pdf'), [
+            'as' => 'order_invoice.pdf',
+            'mime' => 'application/pdf'
+        ])
         ->view('emails.category.category-created');
     }
 }
