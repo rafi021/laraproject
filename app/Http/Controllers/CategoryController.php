@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Mail\CategoryCreated;
+use App\Mail\CategoryCreateMarkdown;
 
 class CategoryController extends Controller
 {
@@ -64,7 +65,7 @@ class CategoryController extends Controller
         // Mail Send Command
         $user = User::find(1);
         Mail::to($user)->send(
-            new CategoryCreated($category)
+            new CategoryCreateMarkdown($category)
         );
 
 
