@@ -38,3 +38,4 @@ Route::get('positions', [FrontController::class, 'positions']);
 
 
 Route::resource('/products', ProductController::class);
+
